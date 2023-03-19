@@ -38,7 +38,7 @@ class MinimumHeap:
 
     # public methods used to add, get and 
     # insert a new item in the heap
-    
+
     def insert(self, item):
         self.heap.append(item)
         self.__moveUp(self.heap, len(self.heap) - 1)
@@ -48,6 +48,22 @@ class MinimumHeap:
         self.heap[0], self.heap[lastIdx] = self.heap[lastIdx], self.heap[0]
         self.heap.pop()
         self.__moveDown(self.heap, 0, len(self.heap) - 1)
+    
+    def printHeap(self):
+        childOneIdx = 1
+        childTwoIdx = 2
+        startIdx = 0
+        endIdx = len(self.heap) - 1
+
+        level = endIdx
+        while childOneIdx <= endIdx:
+            # print(" "*level,self.heap[startIdx])
+            level -= 2
+            print(" "* level, self.heap[childOneIdx], "", self.heap[childTwoIdx])
+            startIdx += 1
+            childOneIdx = startIdx * 2 + 1
+            childTwoIdx = startIdx * 2 + 2
+
     
     def getMinValue(self):
         return self.heap[0]
