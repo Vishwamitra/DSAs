@@ -1,9 +1,9 @@
-class MinimumHeap:
+import math
+class MaximumHeap:
     def __init__(self, array):
         self.heap = self.__buildHeap(array)
 
     # private methods used within this class
-
     def __buildHeap(self, array):
         parentNodeIdx = (len(array) - 2) // 2
         for idx in reversed(range(parentNodeIdx + 1)):
@@ -12,7 +12,7 @@ class MinimumHeap:
        
     def __moveUp(self, heap, startIdx):
         parentIdx = (startIdx - 1) // 2
-        while startIdx > 0 and heap[startIdx] < heap[parentIdx]:
+        while startIdx > 0 and heap[startIdx] > heap[parentIdx]:
             heap[startIdx], heap[parentIdx] = heap[parentIdx], heap[startIdx]
             startIdx = parentIdx
             parentIdx = (startIdx - 1) // 2
@@ -24,12 +24,11 @@ class MinimumHeap:
                 childTwoIdx = startIdx * 2 + 2
             else:
                 childTwoIdx = -1
-            if childTwoIdx != -1 and heap[childTwoIdx] < heap[childOneIdx]:
+            if childTwoIdx != -1 and heap[childTwoIdx] > heap[childOneIdx]:
                 possibleSwapIdx = childTwoIdx
             else:
                 possibleSwapIdx = childOneIdx
-            
-            if heap[possibleSwapIdx] < heap[startIdx]:
+            if heap[possibleSwapIdx] > heap[startIdx]:
                 heap[startIdx], heap[possibleSwapIdx] = heap[possibleSwapIdx], heap[startIdx]
                 startIdx = possibleSwapIdx
                 childOneIdx = startIdx * 2 + 1
@@ -49,21 +48,28 @@ class MinimumHeap:
         self.heap.pop()
         self.__moveDown(self.heap, 0, len(self.heap) - 1)
     
-    def printHeap(self):
-        childOneIdx = 1
-        childTwoIdx = 2
-        startIdx = 0
-        endIdx = len(self.heap) - 1
+    # returns heapified array
+    def getHeapArray(self):
+        return self.heap
 
-        level = endIdx
-        while childOneIdx <= endIdx:
-            # print(" "*level,self.heap[startIdx])
-            level -= 2
-            print(" "* level, self.heap[childOneIdx], "", self.heap[childTwoIdx])
-            startIdx += 1
-            childOneIdx = startIdx * 2 + 1
-            childTwoIdx = startIdx * 2 + 2
+    # print heapified array in tree structure
+    def getHeapTree(self):
+        k = level = 0
+        tree = ""
+        size = len(self.heap) - 1
+        lSize = int(math.floor(math.log(16, 2))) + 1
+        totalSpace = (2**lSize)*2
+        while k <= size:
+            levelMax = 2**level
+            for l in range(1, levelMax+1):
+                tree = tree + " "*int(totalSpace/(2**level + 1)) + str(self.heap[k])
+                k = k + 1
+                if k > size:
+                    break
+            level += 1
+            tree = tree + "\n\n"
+        return tree
 
-    
+    # returns minimum value
     def getMinValue(self):
         return self.heap[0]
