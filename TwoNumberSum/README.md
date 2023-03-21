@@ -1,4 +1,4 @@
-# Problem Statement
+# Classic Two Number Sum - Problem Statement
 Write a function that takes two parameters 1. a non-empty array of unique integers 2. An integer (Target Sum).
 If any two of the numbers from the input array sum up to the Target Sum, the function should return those two numbers in an array in any order.
 
