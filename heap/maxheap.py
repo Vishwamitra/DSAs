@@ -57,7 +57,7 @@ class MaximumHeap:
         k = level = 0
         tree = ""
         size = len(self.heap) - 1
-        lSize = int(math.floor(math.log(16, 2))) + 1
+        lSize = int(math.floor(math.log(size, 2))) + 1
         totalSpace = (2**lSize)*2
         while k <= size:
             levelMax = 2**level
