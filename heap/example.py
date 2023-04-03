@@ -1,13 +1,12 @@
 from minheap import MinimumHeap
 from maxheap import MaximumHeap
-import math
+
 
 def tryHeapDataStructure():
     listArrayMin = [100, 2, 3, 4, 7, 9, 10, 8, 16, 14, 20, 21]
     listArrayMax = [100, 2, 3, 4, 7, 9, 10, 8, 16, 14, 20, 21]
     newMinHeap = MinimumHeap(listArrayMin)
     newMaxHeap = MaximumHeap(listArrayMax)
-
 
     # print the minimum value i.e. 1
     print(newMinHeap.getMinValue())
